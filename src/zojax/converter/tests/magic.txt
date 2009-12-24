@@ -1,0 +1,34 @@
+=======
+ Magic
+=======
+
+Extract filetypes from file content
+
+  >>> from z3c.filetype import magic
+  >>> import os
+  >>> m = magic.MagicFile()
+  >>> testData = os.path.join(os.path.dirname(magic.__file__),'testdata')
+  >>> fileNames = sorted(os.listdir(testData))
+  >>> for name in fileNames:
+  ...     if name==".svn": continue
+  ...     path = os.path.join(testData, name)
+  ...     print '%s --> %r' % (name,sorted(m.detect(file(path))))
+  DS_Store --> []
+  IMG_0504.JPG --> ['image/jpeg']
+  faces_gray.avi --> ['video/x-msvideo']
+  ftyp.mov --> ['video/quicktime']
+  ipod.mp4 --> ['video/mp4', 'video/quicktime']
+  jumps.mov --> ['video/quicktime']
+  logo.gif --> ['image/gif']
+  logo.gif.bz2 --> ['application/x-bzip2']
+  mpeglayer3.mp3 --> ['audio/mpeg']
+  test.flv --> ['video/x-flv']
+  test.gnutar --> ['application/x-tar']
+  test.html --> ['text/html']
+  test.png --> ['image/png']
+  test.tar --> ['application/x-tar']
+  test.tgz --> ['application/x-gzip']
+  test.txt.gz --> ['application/x-gzip']
+  test2.html --> ['text/html']
+  test2.thml --> ['text/html']
+  thumbnailImage_small.jpeg --> ['image/jpeg']
