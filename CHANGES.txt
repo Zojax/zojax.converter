@@ -1,0 +1,51 @@
+=======
+CHANGES
+=======
+
+- Copyright changed to 'Zope Foundation and Contributors'
+
+
+1.0.0 (2009-05-21)
+------------------
+
+- API refactoring (simplify)
+
+- Remove z3c.filetype dependency
+
+
+0.3.2 (2009-03-20)
+------------------
+
+- Added PILwoTK to dependencies
+
+
+0.3.1 (2008-10-02)
+------------------
+
+- Fixed mimetype detection
+
+
+0.3.0 (2008-10-01)
+------------------
+
+- Added mimetype detection api
+
+
+0.2.1 (2008-09-30)
+------------------
+
+- Fixed png converter
+
+
+0.2.0 (2008-09-23)
+------------------
+
+- Added mimetype autodetection in Data object
+
+- Tests added
+
+
+0.1 (2008-02-25)
+----------------
+
+- Initial release

@@ -1,0 +1,32 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <zcml:configure zcml:condition="installed zojax.converter.image.jpg">
+    <utility name="image/jpeg:image/jpeg" factory=".jpg.JPEGtoJPEGConverter" />
+  </zcml:configure>
+
+  <zcml:configure zcml:condition="installed zojax.converter.image.gif">
+    <utility name="image/gif:image/gif" factory=".gif.GIFtoGIFConverter" />
+  </zcml:configure>
+
+  <zcml:configure zcml:condition="installed zojax.converter.image.png">
+    <utility name="image/png:image/png" factory=".png.PNGtoPNGConverter" />
+  </zcml:configure>
+  
+  <zcml:configure zcml:condition="installed zojax.converter.image.jpggif">
+    <utility name="image/gif:image/jpeg" factory=".jpggif.GIFtoJPEGConverter" />
+    <utility name="image/jpeg:image/gif" factory=".jpggif.JPEGtoGIFConverter" />
+  </zcml:configure>
+
+  <zcml:configure zcml:condition="installed zojax.converter.image.jpgpng">
+    <utility name="image/png:image/jpeg" factory=".jpgpng.PNGtoJPEGConverter" />
+    <utility name="image/jpeg:image/png" factory=".jpgpng.JPEGtoPNGConverter" />
+  </zcml:configure>
+
+  <zcml:configure zcml:condition="installed zojax.converter.image.pnggif">
+    <utility name="image/png:image/gif" factory=".pnggif.PNGtoGIFConverter" />
+    <utility name="image/gif:image/png" factory=".pnggif.GIFtoPNGConverter" />
+  </zcml:configure>
+
+</configure>
