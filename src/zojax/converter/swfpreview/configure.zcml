@@ -1,0 +1,125 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <zcml:configure zcml:condition="installed zojax.converter.swfpreview">
+
+    <utility
+       name="application/pdf:application/x-shockwave-flash"
+       factory=".swfpreview.PDF2SWFPreviewConverter" />
+    <utility
+       name="application/rtf:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="text/rtf:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="text/plain:application/x-shockwave-flash"
+       factory=".swfpreview.Text2SWFPreviewConverter" />
+    <utility
+       name="application/msword:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.chart:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.database:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.formula:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.graphics:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.graphics-template:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.image:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.presentation:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.presentation-template:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.spreadsheet:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.spreadsheet-template:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.text:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.text-template:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.text-web:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.ms-excel:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.spreadsheetml.template:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.presentationml.presentation:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.presentationml.slideshow:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.presentationml.template:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.wordprocessingml.document:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.wordprocessingml.template:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
+       name="application/vnd.truedoc:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+
+    <utility
+       name="application/vnd.ms-word.document.macroEnabled.12:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-word.template.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-powerpoint.template.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-powerpoint.addin.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-powerpoint.slideshow.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-powerpoint.presentation.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-excel.addin.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-excel.sheet.binary.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-excel.sheet.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-excel.template.macroEnabled.12:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+   <utility
+          name="application/vnd.openxmlformats-officedocument.sp:application/x-shockwave-flash"
+          factory=".swfpreview.OO2SWFPreviewConverter" />
+
+  </zcml:configure>
+
+</configure>

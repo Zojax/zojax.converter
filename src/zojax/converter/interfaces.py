@@ -53,3 +53,9 @@ class ISimpleImageConverter(IConverter):
 
     def convert(source, width=None, height=None, scale=0):
         """ convert image """
+
+
+class ISWFPreviewConverter(IConverter):
+
+    def convert(source):
+        """ convert to swf preview """
