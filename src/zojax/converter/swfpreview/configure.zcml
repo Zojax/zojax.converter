@@ -14,6 +14,9 @@
        name="text/rtf:application/x-shockwave-flash"
        factory=".swfpreview.OO2SWFPreviewConverter" />
     <utility
+       name="text/csv:application/x-shockwave-flash"
+       factory=".swfpreview.OO2SWFPreviewConverter" />
+    <utility
        name="text/plain:application/x-shockwave-flash"
        factory=".swfpreview.Text2SWFPreviewConverter" />
     <utility
