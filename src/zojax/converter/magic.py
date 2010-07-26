@@ -434,7 +434,7 @@ class MagicFile(object):
         for line in data:
             line_no += 1
 
-            data = self.parse_line(line)
+            data = self.parse_line(line, line_no)
             if data is None:
                 continue
 
@@ -455,7 +455,7 @@ class MagicFile(object):
             while self.tests[-1].level > 0 :
                 self.tests.pop()
 
-    def parse_line(self, line):
+    def parse_line(self, line, line_no):
         line = line.lstrip().rstrip('\r\n')
 
         if not line or line[0]=='#':
@@ -475,7 +475,7 @@ class MagicFile(object):
         try:
             offset = Offset(offset)
         except:
-            raise MagicFileError('line=[%s]' % line)
+            raise MagicFileError('line=[%s] %s' % (line_no, line))
 
         # skip spaces
         line = line.lstrip()
