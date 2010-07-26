@@ -44,7 +44,7 @@ class PDF2SWFPreviewConverter(object):
             parts = shlex.split('sh -c "%s %s -o %s -T 9 -f"' % (self.PDF_CONVERTER_EXECUTABLE, pth, swf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
-            if errors or not os.path.exists(swf_path):
+            if not os.path.exists(swf_path):
                 raise ConverterException(out, errors)
             temp_files.append(swf_path)
             return open(swf_path).read()
@@ -71,7 +71,6 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
             parts = shlex.split('sh -c "%s --stdout %s > %s"' % (self.OO_CONVERTER_EXECUTABLE, pth, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
-            print out, errors
             if errors or not os.path.exists(pdf_path):
                 raise ConverterException(out, errors)
             temp_files.append(pdf_path)
