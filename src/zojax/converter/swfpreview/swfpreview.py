@@ -71,7 +71,7 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
             parts = shlex.split('sh -c "%s --stdout %s > %s"' % (self.OO_CONVERTER_EXECUTABLE, pth, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
-            if errors or not os.path.exists(pdf_path):
+            if not os.path.exists(pdf_path):
                 raise ConverterException(out, errors)
             temp_files.append(pdf_path)
             return super(OO2SWFPreviewConverter, self).convert(open(pdf_path))
