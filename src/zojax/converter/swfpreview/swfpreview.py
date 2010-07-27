@@ -34,12 +34,12 @@ class PDF2SWFPreviewConverter(object):
         temp_files = []
         try:
             pth = tempfile.mkstemp()[1]
+            temp_files.append(pth)
             try:
                 fp = open(pth, 'w')
                 fp.write(data.read())
             finally:
                 fp.close()
-            temp_files.append(pth)
             swf_path = pth + ".swf"
             parts = shlex.split('sh -c "%s %s -o %s -T 9 -f"' % (self.PDF_CONVERTER_EXECUTABLE, pth, swf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -62,6 +62,7 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
         temp_files = []
         try:
             pth = tempfile.mkstemp()[1]
+            temp_files.append(pth)
             fp = open(pth, 'w')
             try:
                 fp.write(data.read())
