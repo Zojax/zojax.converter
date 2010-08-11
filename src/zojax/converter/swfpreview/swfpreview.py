@@ -23,10 +23,10 @@ from zojax.converter.interfaces import ConverterException
 from zojax.converter.interfaces import ISWFPreviewConverter
 
 
-class PDF2SWFPreviewConverter(object):
+class BasePreviceConverter(object):
     interface.implementsOnly(ISWFPreviewConverter)
 
-    PDF_CONVERTER_EXECUTABLE = 'pdf2swf'
+    CONVERTER_EXECUTABLE = 'pdf2swf'
 
     def convert(self, data):
         """ convert image """
@@ -41,7 +41,7 @@ class PDF2SWFPreviewConverter(object):
             finally:
                 fp.close()
             swf_path = pth + ".swf"
-            parts = shlex.split('sh -c "%s %s -o %s -T 9 -f"' % (self.PDF_CONVERTER_EXECUTABLE, pth, swf_path))
+            parts = shlex.split('sh -c "%s %s -o %s -T 9 -f"' % (self.CONVERTER_EXECUTABLE, pth, swf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
             if not os.path.exists(swf_path):
@@ -51,6 +51,29 @@ class PDF2SWFPreviewConverter(object):
         finally:
             for i in temp_files:
                 os.remove(i)
+
+
+class PDF2SWFPreviewConverter(BasePreviceConverter):
+
+    CONVERTER_EXECUTABLE = 'pdf2swf'
+
+
+class GIF2SWFPreviewConverter(BasePreviceConverter):
+    interface.implementsOnly(ISWFPreviewConverter)
+
+    CONVERTER_EXECUTABLE = 'gif2swf'
+
+
+class JPG2SWFPreviewConverter(BasePreviceConverter):
+    interface.implementsOnly(ISWFPreviewConverter)
+
+    CONVERTER_EXECUTABLE = 'jpeg2swf'
+
+
+class PNG2SWFPreviewConverter(BasePreviceConverter):
+    interface.implementsOnly(ISWFPreviewConverter)
+
+    CONVERTER_EXECUTABLE = 'png2swf'
 
 
 class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):

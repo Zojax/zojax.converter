@@ -8,6 +8,15 @@
        name="application/pdf:application/x-shockwave-flash"
        factory=".swfpreview.PDF2SWFPreviewConverter" />
     <utility
+       name="image/gif:application/x-shockwave-flash"
+       factory=".swfpreview.GIF2SWFPreviewConverter" />
+    <utility
+       name="image/jpeg:application/x-shockwave-flash"
+       factory=".swfpreview.JPG2SWFPreviewConverter" />
+    <utility
+       name="image/png:application/x-shockwave-flash"
+       factory=".swfpreview.PNG2SWFPreviewConverter" />
+    <utility
        name="application/rtf:application/x-shockwave-flash"
        factory=".swfpreview.OO2SWFPreviewConverter" />
     <utility
