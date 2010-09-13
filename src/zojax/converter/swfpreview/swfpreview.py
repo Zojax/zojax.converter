@@ -98,7 +98,7 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
             if errors:
-                logger.warning('Error getting preview (%s): %s', self.OO_CONVERTER_EXECUTABLE, errors)
+                logger.warning('Error getting preview (%s, %s): %s', "".join(parts), self.OO_CONVERTER_EXECUTABLE, errors)
             if not os.path.exists(pdf_path):
                 raise ConverterException(out, errors)
             temp_files.append(pdf_path)
