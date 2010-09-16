@@ -88,7 +88,7 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
         try:
             pth = tempfile.mkstemp()[1]
             if filename:
-                pth += os.path.splitext(filename)
+                pth += os.path.splitext(filename)[1]
             temp_files.append(pth)
             fp = open(pth, 'w')
             try:
