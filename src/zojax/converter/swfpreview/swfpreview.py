@@ -30,7 +30,7 @@ class BasePreviceConverter(object):
 
     CONVERTER_EXECUTABLE = 'pdf2swf'
 
-    def convert(self, data):
+    def convert(self, data, filename=None):
         """ convert image """
         data.seek(0, 0)
         temp_files = []
@@ -82,11 +82,13 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
 
     OO_CONVERTER_EXECUTABLE = 'jodconverter'
 
-    def convert(self, data):
+    def convert(self, data, filename=None):
         data.seek(0, 0)
         temp_files = []
         try:
             pth = tempfile.mkstemp()[1]
+            if filename:
+                pth += os.path.splitext(filename)
             temp_files.append(pth)
             fp = open(pth, 'w')
             try:
