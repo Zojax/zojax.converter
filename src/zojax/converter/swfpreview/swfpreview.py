@@ -80,7 +80,7 @@ class PNG2SWFPreviewConverter(BasePreviceConverter):
 
 class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
 
-    OO_CONVERTER_EXECUTABLE = 'unoconv'
+    OO_CONVERTER_EXECUTABLE = 'jodconverter'
 
     def convert(self, data):
         data.seek(0, 0)
@@ -94,7 +94,7 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
             finally:
                 fp.close()
             pdf_path = pth + ".pdf"
-            parts = shlex.split('sh -c "%s --stdout %s > %s"' % (self.OO_CONVERTER_EXECUTABLE, pth, pdf_path))
+            parts = shlex.split('sh -c "%s %s %s"' % (self.OO_CONVERTER_EXECUTABLE, pth, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
             if errors:
