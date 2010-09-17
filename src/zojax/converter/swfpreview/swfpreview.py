@@ -46,6 +46,7 @@ class BasePreviceConverter(object):
             parts = shlex.split('sh -c "%s %s -o %s -T 9 -f"' % (self.CONVERTER_EXECUTABLE, pth, swf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
+            res = p.wait()
             if not os.path.exists(swf_path):
                 raise ConverterException(out, errors)
             temp_files.append(swf_path)
@@ -88,17 +89,18 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
         try:
             pth = tempfile.mkstemp()[1]
             if filename:
-                pth += os.path.splitext(filename)[1]
+                pth += str(os.path.splitext(filename)[1].strip())
+            pdf_path = pth + ".pdf"
             temp_files.append(pth)
             fp = open(pth, 'w')
             try:
                 fp.write(data.read())
             finally:
                 fp.close()
-            pdf_path = pth + ".pdf"
             parts = shlex.split('sh -c "%s %s %s"' % (self.OO_CONVERTER_EXECUTABLE, pth, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
+            res = p.wait()
             if errors:
                 logger.warning('Error getting preview (%s, %s): %s', "".join(parts), self.OO_CONVERTER_EXECUTABLE, errors)
             if not os.path.exists(pdf_path):
@@ -116,7 +118,7 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
 
     PS2PDF_EXECUTABLE = 'ps2pdf'
 
-    def convert(self, data):
+    def convert(self, data, filename=None):
         data.seek(0, 0)
         temp_files = []
         try:
@@ -130,6 +132,7 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
             parts = shlex.split('sh -c "%s -o - -q %s | %s - %s"' % (self.A2PS_EXECUTABLE, pth, self.PS2PDF_EXECUTABLE, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
+            res = p.wait()
             if errors or not os.path.exists(pdf_path):
                 raise ConverterException(out, errors)
             temp_files.append(pdf_path)
