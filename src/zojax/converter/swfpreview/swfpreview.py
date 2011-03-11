@@ -137,7 +137,6 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
                 fp.close()
             pdf_path = pth + ".pdf"
             parts = shlex.split(self.A2PS_COMMAND % (self.A2PS_EXECUTABLE, pth, self.PS2PDF_EXECUTABLE, pdf_path))
-            print parts
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
             res = p.wait()
