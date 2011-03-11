@@ -29,6 +29,9 @@
        name="text/plain:application/x-shockwave-flash"
        factory=".swfpreview.Text2SWFPreviewConverter" />
     <utility
+       name="text/html:application/x-shockwave-flash"
+       factory=".swfpreview.HTML2SWFPreviewConverter" />
+    <utility
        name="application/msword:application/x-shockwave-flash"
        factory=".swfpreview.OO2SWFPreviewConverter" />
     <utility

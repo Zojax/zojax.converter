@@ -29,6 +29,8 @@ class BasePreviceConverter(object):
     interface.implementsOnly(ISWFPreviewConverter)
 
     CONVERTER_EXECUTABLE = 'pdf2swf'
+    
+    COMMAND = 'sh -c "%s %s -o %s -T 9 -f"'
 
     def convert(self, data, filename=None):
         """ convert image """
@@ -43,7 +45,7 @@ class BasePreviceConverter(object):
             finally:
                 fp.close()
             swf_path = pth + ".swf"
-            parts = shlex.split('sh -c "%s %s -o %s -T 9 -f"' % (self.CONVERTER_EXECUTABLE, pth, swf_path))
+            parts = shlex.split(self.COMMAND % (self.CONVERTER_EXECUTABLE, pth, swf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
             res = p.wait()
@@ -65,18 +67,21 @@ class GIF2SWFPreviewConverter(BasePreviceConverter):
     interface.implementsOnly(ISWFPreviewConverter)
 
     CONVERTER_EXECUTABLE = 'gif2swf'
+    COMMAND = 'sh -c "%s %s -o %s"'
 
 
 class JPG2SWFPreviewConverter(BasePreviceConverter):
     interface.implementsOnly(ISWFPreviewConverter)
 
     CONVERTER_EXECUTABLE = 'jpeg2swf'
+    COMMAND = 'sh -c "%s %s -o %s -T 9"'
 
 
 class PNG2SWFPreviewConverter(BasePreviceConverter):
     interface.implementsOnly(ISWFPreviewConverter)
 
     CONVERTER_EXECUTABLE = 'png2swf'
+    COMMAND = 'sh -c "%s %s -o %s -T 9"'
 
 
 class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
@@ -115,6 +120,8 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
 class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
 
     A2PS_EXECUTABLE = 'a2ps'
+    
+    A2PS_COMMAND = 'sh -c "%s -o - -q %s | %s - %s"'
 
     PS2PDF_EXECUTABLE = 'ps2pdf'
 
@@ -129,7 +136,8 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
             finally:
                 fp.close()
             pdf_path = pth + ".pdf"
-            parts = shlex.split('sh -c "%s -o - -q %s | %s - %s"' % (self.A2PS_EXECUTABLE, pth, self.PS2PDF_EXECUTABLE, pdf_path))
+            parts = shlex.split(self.A2PS_COMMAND % (self.A2PS_EXECUTABLE, pth, self.PS2PDF_EXECUTABLE, pdf_path))
+            print parts
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
             res = p.wait()
@@ -140,3 +148,10 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
         finally:
             for i in temp_files:
                 os.remove(i)
+                
+
+class HTML2SWFPreviewConverter(Text2SWFPreviewConverter):
+
+    A2PS_EXECUTABLE = 'html2ps'
+    
+    A2PS_COMMAND = 'sh -c "%s -o - %s | %s - %s"'
