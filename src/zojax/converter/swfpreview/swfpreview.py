@@ -48,7 +48,6 @@ class BasePreviceConverter(object):
             parts = shlex.split(self.COMMAND % (self.CONVERTER_EXECUTABLE, pth, swf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
-            res = p.wait()
             if not os.path.exists(swf_path):
                 raise ConverterException(out, errors)
             temp_files.append(swf_path)
@@ -105,7 +104,6 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
             parts = shlex.split('sh -c "%s %s %s"' % (self.OO_CONVERTER_EXECUTABLE, pth, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
-            res = p.wait()
             if errors:
                 logger.warning('Error getting preview (%s, %s): %s', "".join(parts), self.OO_CONVERTER_EXECUTABLE, errors)
             if not os.path.exists(pdf_path):
@@ -139,7 +137,6 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
             parts = shlex.split(self.A2PS_COMMAND % (self.A2PS_EXECUTABLE, pth, self.PS2PDF_EXECUTABLE, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, errors = p.communicate()
-            res = p.wait()
             if errors or not os.path.exists(pdf_path):
                 raise ConverterException(out, errors)
             temp_files.append(pdf_path)
