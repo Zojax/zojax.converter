@@ -56,4 +56,6 @@ setup(name = 'zojax.converter',
                           'zope.schema',
                           ],
       include_package_data = True,
-      zip_safe = False)
+      zip_safe = False,
+      dependency_links = ['http://download.zope.org/distribution', 'http://eggs.carduner.net/', 'http://www.mindrot.org/projects/py-bcrypt/'],
+      )
