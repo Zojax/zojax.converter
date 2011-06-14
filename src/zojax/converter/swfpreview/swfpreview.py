@@ -37,21 +37,26 @@ class BasePreviceConverter(object):
         data.seek(0, 0)
         temp_files = []
         try:
-            pth = tempfile.mkstemp()[1]
+            fp, pth = tempfile.mkstemp()
+            fp = fdopen(fp, 'w')
             temp_files.append(pth)
             try:
-                fp = open(pth, 'w')
                 fp.write(data.read())
             finally:
                 fp.close()
             swf_path = pth + ".swf"
             parts = shlex.split(self.COMMAND % (self.CONVERTER_EXECUTABLE, pth, swf_path))
-            p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
             out, errors = p.communicate()
+            res = p.wait()
             if not os.path.exists(swf_path):
                 raise ConverterException(out, errors)
             temp_files.append(swf_path)
-            return open(swf_path).read()
+            fp = open(swf_path)
+            try:
+                return fp.read()
+            finally:
+                fp.close()
         finally:
             for i in temp_files:
                 os.remove(i)
@@ -91,20 +96,21 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
         data.seek(0, 0)
         temp_files = []
         try:
-            pth = tempfile.mkstemp()[1]
+            fp, pth = tempfile.mkstemp()
             if filename:
                 pth += str(os.path.splitext(filename)[1].strip())
             pdf_path = pth + ".pdf"
             temp_files.append(pth)
-            fp = open(pth, 'w')
+            fp = fdopen(fp, 'w')
             try:
                 fp.write(data.read())
             finally:
                 fp.close()
             parts = shlex.split('sh -c "%s %s %s"' % (self.OO_CONVERTER_EXECUTABLE, pth, pdf_path))
-            p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE,close_fds=True)
             out, errors = p.communicate()
-            if errors:
+            res = p.wait()
+            if errors and res:
                 logger.warning('Error getting preview (%s, %s): %s', "".join(parts), self.OO_CONVERTER_EXECUTABLE, errors)
             if not os.path.exists(pdf_path):
                 raise ConverterException(out, errors)
@@ -127,16 +133,17 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
         data.seek(0, 0)
         temp_files = []
         try:
-            pth = tempfile.mkstemp()[1]
-            fp = open(pth, 'w')
+            fp, pth = tempfile.mkstemp()
+            fp = fdopen(fp, 'w')    
             try:
                 fp.write(data.read())
             finally:
                 fp.close()
             pdf_path = pth + ".pdf"
             parts = shlex.split(self.A2PS_COMMAND % (self.A2PS_EXECUTABLE, pth, self.PS2PDF_EXECUTABLE, pdf_path))
-            p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE,close_fds=True)
             out, errors = p.communicate()
+            res = p.wait()
             if errors or not os.path.exists(pdf_path):
                 raise ConverterException(out, errors)
             temp_files.append(pdf_path)
