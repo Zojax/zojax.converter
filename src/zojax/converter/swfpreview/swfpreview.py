@@ -38,7 +38,7 @@ class BasePreviceConverter(object):
         temp_files = []
         try:
             fp, pth = tempfile.mkstemp()
-            fp = fdopen(fp, 'w')
+            fp = os.fdopen(fp, 'w')
             temp_files.append(pth)
             try:
                 fp.write(data.read())
@@ -101,7 +101,7 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
                 pth += str(os.path.splitext(filename)[1].strip())
             pdf_path = pth + ".pdf"
             temp_files.append(pth)
-            fp = fdopen(fp, 'w')
+            fp = os.fdopen(fp, 'w')
             try:
                 fp.write(data.read())
             finally:
@@ -134,7 +134,7 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
         temp_files = []
         try:
             fp, pth = tempfile.mkstemp()
-            fp = fdopen(fp, 'w')    
+            fp = os.fdopen(fp, 'w')    
             try:
                 fp.write(data.read())
             finally:
