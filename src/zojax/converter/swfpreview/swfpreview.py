@@ -39,10 +39,12 @@ class BasePreviceConverter(object):
         try:
             fp, pth = tempfile.mkstemp()
             fp = os.fdopen(fp, 'w')
+            logger.debug('opened %s', pth)
             temp_files.append(pth)
             try:
                 fp.write(data.read())
             finally:
+                logger.debug('closed %s', pth)
                 fp.close()
             swf_path = pth + ".swf"
             parts = shlex.split(self.COMMAND % (self.CONVERTER_EXECUTABLE, pth, swf_path))
@@ -53,9 +55,11 @@ class BasePreviceConverter(object):
                 raise ConverterException(out, errors)
             temp_files.append(swf_path)
             fp = open(swf_path)
+            logger.debug('opened %s', swf_path)
             try:
                 return fp.read()
             finally:
+                logger.debug('closed %s', swf_path)
                 fp.close()
         finally:
             for i in temp_files:
@@ -98,14 +102,19 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
         try:
             fp, pth = tempfile.mkstemp()
             if filename:
+                os.close(fp)
                 pth += str(os.path.splitext(filename)[1].strip())
+                fp = open(pth, 'w')
+            else:
+                fp = os.fdopen(fp, 'w')
+            logger.debug('opened %s', pth)
             pdf_path = pth + ".pdf"
             temp_files.append(pth)
-            fp = os.fdopen(fp, 'w')
             try:
                 fp.write(data.read())
             finally:
                 fp.close()
+                logger.debug('closed %s', pth)
             parts = shlex.split('sh -c "%s %s %s"' % (self.OO_CONVERTER_EXECUTABLE, pth, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE,close_fds=True)
             out, errors = p.communicate()
@@ -134,11 +143,13 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
         temp_files = []
         try:
             fp, pth = tempfile.mkstemp()
-            fp = os.fdopen(fp, 'w')    
+            fp = os.fdopen(fp, 'w')
+            logger.debug('opened %s', pth)
             try:
                 fp.write(data.read())
             finally:
                 fp.close()
+                logger.debug('closed %s', pth)
             pdf_path = pth + ".pdf"
             parts = shlex.split(self.A2PS_COMMAND % (self.A2PS_EXECUTABLE, pth, self.PS2PDF_EXECUTABLE, pdf_path))
             p = subprocess.Popen(parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE,close_fds=True)
