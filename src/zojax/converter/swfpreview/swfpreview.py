@@ -24,6 +24,8 @@ from zojax.converter.interfaces import ISWFPreviewConverter
 
 logger = logging.getLogger('zojax.converter')
 
+CHUNK_SIZE = 1024*64
+
 
 class BasePreviceConverter(object):
     interface.implementsOnly(ISWFPreviewConverter)
@@ -42,7 +44,10 @@ class BasePreviceConverter(object):
             logger.debug('opened %s', pth)
             temp_files.append(pth)
             try:
-                fp.write(data.read())
+                d = data.read(CHUNK_SIZE)
+                while d:
+                    fp.write(d)
+                    d = data.read(CHUNK_SIZE)
             finally:
                 logger.debug('closed %s', pth)
                 fp.close()
@@ -111,7 +116,10 @@ class OO2SWFPreviewConverter(PDF2SWFPreviewConverter):
             pdf_path = pth + ".pdf"
             temp_files.append(pth)
             try:
-                fp.write(data.read())
+                d = data.read(CHUNK_SIZE)
+                while d:
+                    fp.write(d)
+                    d = data.read(CHUNK_SIZE)
             finally:
                 fp.close()
                 logger.debug('closed %s', pth)
@@ -146,7 +154,10 @@ class Text2SWFPreviewConverter(PDF2SWFPreviewConverter):
             fp = os.fdopen(fp, 'w')
             logger.debug('opened %s', pth)
             try:
-                fp.write(data.read())
+                d = data.read(CHUNK_SIZE)
+                while d:
+                    fp.write(d)
+                    d = data.read(CHUNK_SIZE)
             finally:
                 fp.close()
                 logger.debug('closed %s', pth)
