@@ -59,3 +59,9 @@ class ISWFPreviewConverter(IConverter):
 
     def convert(source):
         """ convert to swf preview """
+
+
+class IPDFPreviewConverter(IConverter):
+
+    def convert(source):
+        """ convert to pdf preview """

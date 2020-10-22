@@ -1,0 +1,126 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <zcml:configure zcml:condition="installed zojax.converter.pdfpreview">
+
+    <utility
+       name="application/rtf:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="text/rtf:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="text/csv:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="text/plain:application/pdf"
+       factory=".pdfpreview.Text2PDFPreviewConverter" />
+
+    <utility
+       name="application/msword:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.chart:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.database:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.formula:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.graphics:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.graphics-template:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.image:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.presentation:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.presentation-template:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.spreadsheet:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.spreadsheet-template:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.text:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.text-template:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.oasis.opendocument.text-web:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.ms-excel:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.spreadsheetml.template:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.presentationml.presentation:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.presentationml.slideshow:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.presentationml.template:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.wordprocessingml.document:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.openxmlformats-officedocument.wordprocessingml.template:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+    <utility
+       name="application/vnd.truedoc:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+
+    <utility
+       name="application/vnd.ms-word.document.macroEnabled.12:application/pdf"
+       factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-word.template.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-powerpoint.template.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-powerpoint.addin.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-powerpoint.slideshow.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-powerpoint.presentation.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-excel.addin.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-excel.sheet.binary.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-excel.sheet.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.ms-excel.template.macroEnabled.12:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
+          name="application/vnd.openxmlformats-officedocument.sp:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+
+  </zcml:configure>
+
+</configure>
