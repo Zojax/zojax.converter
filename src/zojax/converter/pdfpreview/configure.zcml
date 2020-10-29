@@ -106,6 +106,9 @@
           name="application/vnd.ms-powerpoint.presentation.macroEnabled.12:application/pdf"
           factory=".pdfpreview.OO2PDFPreviewConverter" />
    <utility
+          name="application/vnd.ms-powerpoint:application/pdf"
+          factory=".pdfpreview.OO2PDFPreviewConverter" />
+   <utility
           name="application/vnd.ms-excel.addin.macroEnabled.12:application/pdf"
           factory=".pdfpreview.OO2PDFPreviewConverter" />
    <utility
